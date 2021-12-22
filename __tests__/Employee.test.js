@@ -2,11 +2,34 @@ const { expect } = require('@jest/globals');
 const { test } = require('picomatch');
 const Employee = require('../lib/Employe');
 
-test("gets employee's info as an object", () => {
-    const employee = new Employee('Jim');
+test("set and get employee's info as an object", () => {
+    const employee = new Employee('Jim', '123', 'jim@company.com');
 
-    expect(employee.getStatus()).toHaveProperty('name');
-    expect(employee.getStatus()).toHaveProperty('id');
-    expect(employee.getStatus()).toHaveProperty('email');
+    expect(employee.name).toBe('Jim');
+    expect(employee.id).toBe('123');
+    expect(employee.email).toBe('jim@company.com');
 });
 
+test('gets employee name', () => {
+    const employee = new Employee('Jim', '123', 'jim@company.com');
+
+    expect(employee.getName()).toEqual('Jim');
+});
+
+test('gets employee id number', () => {
+    const employee = new Employee('Jim', '123', 'jim@company.com');
+
+    expect(employee.getId()).toEqual('123');
+});
+
+test('gets employee email address', () => {
+    const employee = new Employee('Jim', '123', 'jim@company.com');
+
+    expect(employee.getEmail()).toEqual('jim@company.com');
+});
+
+test("correct role is returned from getRole() \"Employee\"", () => {
+    const employee = new Employee('Jim', '123', 'jim@company.com');
+
+    expect(employee.getRole()).toEqual('Employee');
+});
