@@ -1,7 +1,7 @@
 // Packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer');
-//const generateMarkdown = require('./utils/generateMarkdown');
+const generatePage = require('./src/page-template');
 
 //Variables
 var finished = 'no';
@@ -143,5 +143,16 @@ const promptIntern = teamData => {
     });
 }
 
-promptUser();
-   // .then(promptEngineer);
+promptUser()
+  .then(teamData => {
+    const pageHTML = generatePage(teamData);
+
+    fs.writeFile('./dist/index.html', pageHTML, err => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      console.log('Page created! Check out index.html in this directory to see it!');
+
+    });
+  });
