@@ -8,10 +8,22 @@ header {
     background-color: red;
     text-align: center;
     height: 80px;
-
 }
 
 h1 {
     color: white;
     padding-top: 15px;
+}
+
+.card-body {
+    background-color: blue;
+    color: white;
+}
+
+.container {
+    margin-top: 12px;
+}
+
+.card {
+    margin-bottom: 12px;
 }
