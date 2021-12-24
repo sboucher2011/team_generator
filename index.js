@@ -2,6 +2,9 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 const generatePage = require('./src/page-template');
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
 
 //Variables
 var finished = 'no';
@@ -36,13 +39,17 @@ const promptUser = () => {
 
         },
     ])
-    .then(managerData => {
-        if (managerData.question == "Engineer") {
-            return promptEngineer(managerData);
-        } else if (managerData.question == "Intern") {
-            return promptIntern(managerData);
+    .then(({ managerName, managerId, managerEmail, managersOfficeNumber, question}) => {
+        this.manager = new Manager(managerName, managerId, managerEmail, managersOfficeNumber);
+
+        if (question == "Engineer") {
+            return promptEngineer(this.manager);
+        } else if (question == "Intern") {
+            return promptIntern(this.manager);
         }
+       
     });
+
 };
 
 const promptEngineer = teamData => {
@@ -85,12 +92,15 @@ const promptEngineer = teamData => {
 
         },
     ])
-    .then(managerData => {
-        if (managerData.question == "Engineer") {
-            return promptEngineer(managerData);
-        } else if (managerData.question == "Intern") {
-            return promptIntern(managerData);
+    .then(({ engineerName, engineerId, engineerEmail, engineersGitHub, question}) => {
+        this.engineer = new Engineer(engineerName, engineerId, engineerEmail, engineersGitHub);
+
+        if (question == "Engineer") {
+            return promptEngineer(this.engineer);
+        } else if (question == "Intern") {
+            return promptIntern(this.engineer);
         }
+       
     });
 }
 
@@ -134,17 +144,24 @@ const promptIntern = teamData => {
 
         },
     ])
-    .then(managerData => {
-        if (managerData.question == "Engineer") {
-            return promptEngineer(managerData);
-        } else if (managerData.question == "Intern") {
-            return promptIntern(managerData);
+    .then(({ internName, internId, internEmail, internSchool, question}) => {
+        this.intern = new Intern(internName, internId, internEmail, internSchool);
+
+        if (question == "Engineer") {
+            return promptEngineer(this.intern);
+        } else if (question == "Intern") {
+            return promptIntern(this.intern);
         }
+       
     });
 }
 
 promptUser()
-  .then(teamData => {
+ .then(teamData => {
+    console.log(this.manager);
+    console.log(this.engineer);
+    console.log(this.intern);
+    /*
     const pageHTML = generatePage(teamData);
 
     fs.writeFile('./dist/index.html', pageHTML, err => {
@@ -155,4 +172,8 @@ promptUser()
       console.log('Page created! Check out index.html in this directory to see it!');
 
     });
+
+    */
   });
+
+
