@@ -6,6 +6,9 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
+var engineer = [];
+var intern = [];
+
 //Variables
 var finished = 'no';
 
@@ -43,26 +46,22 @@ const promptUser = () => {
         this.manager = new Manager(managerName, managerId, managerEmail, managersOfficeNumber);
 
         if (question == "Engineer") {
-            return promptEngineer(this.manager);
+            return promptEngineer();
         } else if (question == "Intern") {
-            return promptIntern(this.manager);
+            return promptIntern();
         }
        
     });
 
 };
 
-const promptEngineer = teamData => {
+const promptEngineer = () => {
     console.log(`
   =================
   Add a New Engineer
   =================
   `);
-  
-  // If there's no 'engineers' array property, create one
-  if (!teamData.engineers) {
-    teamData.engineers = [];
-  }
+
     return inquirer.prompt([
         {
         type: 'input',
@@ -93,28 +92,24 @@ const promptEngineer = teamData => {
         },
     ])
     .then(({ engineerName, engineerId, engineerEmail, engineersGitHub, question}) => {
-        this.engineer = new Engineer(engineerName, engineerId, engineerEmail, engineersGitHub);
+        engineer.push(new Engineer(engineerName, engineerId, engineerEmail, engineersGitHub));
 
         if (question == "Engineer") {
-            return promptEngineer(this.engineer);
+            return promptEngineer();
         } else if (question == "Intern") {
-            return promptIntern(this.engineer);
+            return promptIntern();
         }
        
     });
 }
 
-const promptIntern = teamData => {
+const promptIntern = () => {
     console.log(`
   =================
   Add a New Intern
   =================
   `);
-  
-  // If there's no 'interns' array property, create one
-  if (!teamData.interns) {
-    teamData.interns = [];
-  }
+
     return inquirer.prompt([
         {
         type: 'input',
@@ -145,22 +140,24 @@ const promptIntern = teamData => {
         },
     ])
     .then(({ internName, internId, internEmail, internSchool, question}) => {
-        this.intern = new Intern(internName, internId, internEmail, internSchool);
+        intern.push(new Intern(internName, internId, internEmail, internSchool));
 
         if (question == "Engineer") {
-            return promptEngineer(this.intern);
+            return promptEngineer();
         } else if (question == "Intern") {
-            return promptIntern(this.intern);
+            return promptIntern();
         }
        
     });
 }
 
 promptUser()
- .then(teamData => {
+ .then( () => {
     console.log(this.manager);
-    console.log(this.engineer);
-    console.log(this.intern);
+    console.log(engineer);
+    console.log(engineer.length);
+    console.log(intern);
+
     /*
     const pageHTML = generatePage(teamData);
 
