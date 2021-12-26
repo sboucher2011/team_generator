@@ -158,8 +158,7 @@ promptUser()
     console.log(engineer.length);
     console.log(intern);
 
-    /*
-    const pageHTML = generatePage(teamData);
+    const pageHTML = generatePage(this.manager, engineer, intern);
 
     fs.writeFile('./dist/index.html', pageHTML, err => {
       if (err) {
@@ -169,8 +168,6 @@ promptUser()
       console.log('Page created! Check out index.html in this directory to see it!');
 
     });
-
-    */
   });
 
 

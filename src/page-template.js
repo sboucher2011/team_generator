@@ -1,64 +1,21 @@
+const Manager = require('../lib/Manager');
+const Engineer = require('../lib/Engineer');
+const Intern = require('../lib/Intern');
+
 // create the about section
-const generateAbout = aboutText => {
-    if (!aboutText) {
-      return '';
-    }
-  
-    return `
-      <section class="my-3" id="about">
-        <h2 class="text-dark bg-primary p-2 display-inline-block">About Me</h2>
-        <p>${aboutText}</p>
-      </section>
-    `;
+  const generateInterns = () => {
+   //console.log(interns);
   };
   
-  const generateProjects = projectsArr => {
-    return `
-      <section class="my-3" id="portfolio">
-        <h2 class="text-dark bg-primary p-2 display-inline-block">Work</h2>
-        <div class="flex-row justify-space-between">
-        ${projectsArr
-          .filter(({ feature }) => feature)
-          .map(({ name, description, languages, link }) => {
-            return `
-            <div class="col-12 mb-2 bg-dark text-light p-3">
-              <h3 class="portfolio-item-title text-light">${name}</h3>
-              <h5 class="portfolio-languages">
-                Built With:
-                ${languages.join(', ')}
-              </h5>
-              <p>${description}</p>
-              <a href="${link}" class="btn"><i class="fab fa-github mr-2"></i>View Project on GitHub</a>
-            </div>
-          `;
-          })
-          .join('')}
-  
-        ${projectsArr
-          .filter(({ feature }) => !feature)
-          .map(({ name, description, languages, link }) => {
-            return `
-            <div class="col-12 col-md-6 mb-2 bg-dark text-light p-3 flex-column">
-              <h3 class="portfolio-item-title text-light">${name}</h3>
-              <h5 class="portfolio-languages">
-                Built With:
-                ${languages.join(', ')}
-              </h5>
-              <p>${description}</p>
-              <a href="${link}" class="btn mt-auto"><i class="fab fa-github mr-2"></i>View Project on GitHub</a>
-            </div>
-          `;
-          })
-          .join('')}
-        </div>
-      </section>
-    `;
+  const generateEngineers = () => {
+   // console.log('engineer');
   };
   
-  module.exports = templateData => {
+  module.exports = (manager, engineer, intern) => {
     // destructure page data by section
-    const { projects, about, ...header } = templateData;
-  
+    //const { projects, about, ...header } = templateData;
+    
+
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -82,15 +39,15 @@ const generateAbout = aboutText => {
                     <div class="card" style="width: 18rem;">
                         <img src="https://static.thenounproject.com/png/2971026-200.png" class="card-img-top" alt="...">
                         <div class="card-body">
-                          <h5 class="card-title">Jim</h5>
+                          <h5 class="card-title">${manager.getName()}</h5>
                           <p class="card-text">Manager</p>
                         </div>
                         <ul class="list-group list-group-flush">
-                          <li class="list-group-item">ID: 123</li>
+                          <li class="list-group-item">ID: ${manager.getId()}</li>
                           <li class="list-group-item">
-                            <a href="mailto:sboucher2011@gmail.com" class="card-link">sboucher2011@gmail.com</a>
+                            <a href="mailto:${manager.getEmail()}" class="card-link">${manager.getEmail()}</a>
                           </li>
-                          <li class="list-group-item">Phone: 123-456-7890</li>
+                          <li class="list-group-item">Phone: ${manager.getOfficeNumber()}</li>
                         </ul>
                     </div>
                 </div>
@@ -119,6 +76,7 @@ const generateAbout = aboutText => {
                       <h5 class="card-title">Ted</h5>
                       <p class="card-text">Engineer</p>
                     </div>
+                    ${generateEngineers()}
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item">ID: 123</li>
                       <li class="list-group-item">
@@ -137,6 +95,7 @@ const generateAbout = aboutText => {
                       <h5 class="card-title">Chris</h5>
                       <p class="card-text">Intern</p>
                     </div>
+                    ${generateInterns()}
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item">ID: 123</li>
                       <li class="list-group-item">
