@@ -27,7 +27,7 @@ const promptUser = () => {
         {
             type: 'input',
             name: 'managerEmail',
-            message: "Input team manager's email addres"
+            message: "Input team manager's email address"
         },
         {
             type: 'input',
@@ -76,7 +76,7 @@ const promptEngineer = () => {
         {
             type: 'input',
             name: 'engineerEmail',
-            message: "Input team engineer's email addres"
+            message: "Input team engineer's email address"
         },
         {
             type: 'input',
@@ -124,7 +124,7 @@ const promptIntern = () => {
         {
             type: 'input',
             name: 'internEmail',
-            message: "Input team intern's email addres"
+            message: "Input team intern's email address"
         },
         {
             type: 'input',
@@ -153,10 +153,6 @@ const promptIntern = () => {
 
 promptUser()
  .then( () => {
-    console.log(this.manager);
-    console.log(engineer);
-    console.log(engineer.length);
-    console.log(intern);
 
     const pageHTML = generatePage(this.manager, engineer, intern);
 
