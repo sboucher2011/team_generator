@@ -7,26 +7,30 @@ const generateInterns = (intern) => {
   if (intern.length == 0) {
     return '';
   }
-
+  
+  intern.map(({name, id, email, role, school}) => {
+    console.log(school)
   return `
-    <div class="col">
-      <div class="card" style="width: 18rem;">
-        <img src="data:image/png;base64,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" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">${intern[0].getName()}</h5>
-          <p class="card-text">${intern[0].getRole()}</p>
-        </div>
-                    
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">ID: ${intern[0].getId()}</li>
-              <li class="list-group-item">
-                <a href="mailto:${intern[0].getEmail()}" class="card-link">${intern[0].getEmail()}</a>
-              </li>
-                <li class="list-group-item">${intern[0].getSchool()}</li>
-              </ul>
-        </div>
+    ${console.log('yes')}
+  <div class="col">
+  <div class="card" style="width: 18rem;">
+    <img src="data:image/png;base64,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" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">${name}</h5>
+      <p class="card-text">${role}</p>
     </div>
-   `;
+                
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">ID: ${id}</li>
+          <li class="list-group-item">
+            <a href="mailto:${email}" class="card-link">${email}</a>
+          </li>
+            <li class="list-group-item">${school}</li>
+          </ul>
+    </div>
+</div>
+`;
+  })
 };
 
 //create the Engieneer Cards
